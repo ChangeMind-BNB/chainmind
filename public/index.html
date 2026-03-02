@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChainMind — AI Agent Billing on BNB Chain</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">ChainMind</div>
+      <div class="nav-links">
+        <a href="#how-it-works">How It Works</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#docs">Docs</a>
+        <a href="/SKILL.md">SKILL.md</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>Financial Infrastructure for<br>Autonomous AI Agents</h1>
+      <p class="subtitle">
+        Deposit USDC on BNB Chain. Get instant access to Claude, GPT, and open-source LLMs.
+        No credit card. No human approval. Just code.
+      </p>
+      <div class="hero-cta">
+        <button onclick="registerAgent()" class="btn-primary">Give Your Agent a Wallet</button>
+        <a href="#docs" class="btn-secondary">Read the Docs</a>
+      </div>
+    </section>
+
+    <section id="how-it-works" class="steps">
+      <h2>Three Steps to Autonomy</h2>
+      <div class="step-grid">
+        <div class="step">
+          <div class="step-number">1</div>
+          <h3>Register</h3>
+          <code>curl -X POST https://api.chainmind.xyz/v1/register</code>
+          <p>Your agent gets an API token and a deposit code. No forms. No approvals.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <h3>Deposit USDC</h3>
+          <p>Approve + call <code>deposit(amount, code)</code> on our verified BSC contract. Balance activates in ~45 seconds.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <h3>Use LLM APIs</h3>
+          <code>ANTHROPIC_BASE_URL=https://api.chainmind.xyz/proxy/{TOKEN}</code>
+          <p>Every inference call debits your agent's balance. You never receive a bill.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="features">
+      <h2>Why ChainMind?</h2>
+      <div class="feature-grid">
+        <div class="feature">
+          <h3>Verified Smart Contract</h3>
+          <p>Publicly auditable on BscScan. Your agent's funds are transparent and trustworthy.</p>
+        </div>
+        <div class="feature">
+          <h3>Smart Model Routing</h3>
+          <p>Set a budget per request. ChainMind picks the cheapest model that fits. Unique to ChainMind.</p>
+        </div>
+        <div class="feature">
+          <h3>Cache-Aware Billing</h3>
+          <p>Prompt cache hits billed at discounted rates. Savings flow directly to your agent.</p>
+        </div>
+        <div class="feature">
+          <h3>Three Providers</h3>
+          <p>Anthropic, OpenAI, and OpenRouter. Claude, GPT, Qwen, Grok, Gemini — all from one wallet.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="comparison">
+      <h2>Compared to Alternatives</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Capability</th>
+            <th>ChainMind</th>
+            <th>Level5</th>
+            <th>OpenRouter</th>
+            <th>Venice</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Agent self-onboarding</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="no">No</td><td class="no">No</td></tr>
+          <tr><td>No credit card</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="no">No</td><td class="no">No</td></tr>
+          <tr><td>Smart model routing</td><td class="yes">Yes</td><td class="no">No</td><td class="no">No</td><td class="no">No</td></tr>
+          <tr><td>Per-call cost visibility</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="no">No</td></tr>
+          <tr><td>Cache-aware billing</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="no">No</td></tr>
+          <tr><td>Verified smart contract</td><td class="yes">Yes</td><td class="no">No</td><td class="no">No</td><td class="no">No</td></tr>
+          <tr><td>BNB Chain native</td><td class="yes">Yes</td><td class="no">No</td><td class="no">No</td><td class="no">No</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="pricing">
+      <h2>Pricing</h2>
+      <p class="pricing-note">10% markup over provider costs. All prices in USDC per 1M tokens.</p>
+      <div id="pricing-table"></div>
+    </section>
+
+    <section id="docs" class="docs">
+      <h2>API Reference</h2>
+      <table class="endpoint-table">
+        <thead>
+          <tr><th>Method</th><th>Path</th><th>Auth</th><th>Purpose</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="method get">GET</span></td><td>/health</td><td>None</td><td>Service status</td></tr>
+          <tr><td><span class="method post">POST</span></td><td>/v1/register</td><td>None</td><td>Create agent account</td></tr>
+          <tr><td><span class="method get">GET</span></td><td>/v1/pricing</td><td>None</td><td>Current pricing</td></tr>
+          <tr><td><span class="method get">GET</span></td><td>/proxy/:token/balance</td><td>Token</td><td>Check USDC balance</td></tr>
+          <tr><td><span class="method get">GET</span></td><td>/proxy/:token/transactions</td><td>Token</td><td>Transaction history</td></tr>
+          <tr><td><span class="method post">POST</span></td><td>/proxy/:token/v1/messages</td><td>Token</td><td>Anthropic proxy</td></tr>
+          <tr><td><span class="method post">POST</span></td><td>/proxy/:token/v1/chat/completions</td><td>Token</td><td>OpenAI / OpenRouter proxy</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Quick Start</h3>
+      <div class="code-examples">
+        <div class="code-block">
+          <h4>Register</h4>
+          <pre><code>curl -X POST https://api.chainmind.xyz/v1/register</code></pre>
+        </div>
+
+        <div class="code-block">
+          <h4>Claude Code</h4>
+          <pre><code>export ANTHROPIC_BASE_URL=https://api.chainmind.xyz/proxy/{YOUR_TOKEN}
+export ANTHROPIC_API_KEY=chainmind
+claude "Your prompt"</code></pre>
+        </div>
+
+        <div class="code-block">
+          <h4>Python (Anthropic SDK)</h4>
+          <pre><code>import anthropic
+
+client = anthropic.Anthropic(
+    base_url="https://api.chainmind.xyz/proxy/{YOUR_TOKEN}",
+    api_key="chainmind",
+)
+
+response = client.messages.create(
+    model="claude-sonnet-4-6",
+    max_tokens=1024,
+    messages=[{"role": "user", "content": "Hello"}],
+)</code></pre>
+        </div>
+
+        <div class="code-block">
+          <h4>Python (OpenAI SDK)</h4>
+          <pre><code>from openai import OpenAI
+
+client = OpenAI(
+    base_url="https://api.chainmind.xyz/proxy/{YOUR_TOKEN}/v1",
+    api_key="chainmind",
+)
+
+response = client.chat.completions.create(
+    model="gpt-4o",
+    messages=[{"role": "user", "content": "Hello"}],
+)</code></pre>
+        </div>
+
+        <div class="code-block">
+          <h4>Smart Model Routing</h4>
+          <pre><code>curl -X POST https://api.chainmind.xyz/proxy/{TOKEN}/v1/messages \
+  -H "X-ChainMind-Budget: 500000" \
+  -H "X-ChainMind-Route: auto" \
+  -H "X-ChainMind-Min-Tier: mid" \
+  -H "Content-Type: application/json" \
+  -d '{"max_tokens": 1024, "messages": [{"role": "user", "content": "Hello"}]}'
+
+# Response includes: X-ChainMind-Model-Used header</code></pre>
+        </div>
+
+        <div class="code-block">
+          <h4>TypeScript Agent Self-Setup</h4>
+          <pre><code>const { api_token, deposit_code, instructions } = await fetch(
+  "https://api.chainmind.xyz/v1/register",
+  { method: "POST" }
+).then(r => r.json());
+
+// Check balance
+const { balance_usdc } = await fetch(
+  `https://api.chainmind.xyz/proxy/${api_token}/balance`
+).then(r => r.json());
+
+// Route inference
+process.env.ANTHROPIC_BASE_URL =
+  `https://api.chainmind.xyz/proxy/${api_token}`;</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="smart-routing">
+      <h2>Smart Model Routing</h2>
+      <p>Set a budget cap per request. ChainMind picks the cheapest model that can handle it.</p>
+      <div class="routing-headers">
+        <div class="header-doc">
+          <code>X-ChainMind-Budget: 500000</code>
+          <p>Budget in micro-USDC for this request (500000 = $0.50)</p>
+        </div>
+        <div class="header-doc">
+          <code>X-ChainMind-Route: auto</code>
+          <p>Opt-in to smart routing. Without this, the request uses the specified model.</p>
+        </div>
+        <div class="header-doc">
+          <code>X-ChainMind-Min-Tier: mid</code>
+          <p>Quality floor: <code>low</code> = any model, <code>mid</code> = skip budget models, <code>high</code> = premium only</p>
+        </div>
+      </div>
+      <h4>Model Priority (cheapest first)</h4>
+      <ol class="model-order">
+        <li>gpt-4o-mini <span class="tier low">low</span></li>
+        <li>grok-4-1-fast <span class="tier low">low</span></li>
+        <li>claude-haiku-4-5 <span class="tier low">low</span></li>
+        <li>qwen3-max <span class="tier mid">mid</span></li>
+        <li>gemini-3.1-pro <span class="tier mid">mid</span></li>
+        <li>gpt-4o <span class="tier high">high</span></li>
+        <li>claude-sonnet-4-6 <span class="tier high">high</span></li>
+        <li>claude-opus-4-6 <span class="tier high">high</span></li>
+      </ol>
+    </section>
+  </main>
+
+  <footer>
+    <p>ChainMind &mdash; Financial infrastructure for autonomous AI agents on BNB Chain</p>
+  </footer>
+
+  <div id="register-modal" class="modal hidden">
+    <div class="modal-content">
+      <span class="modal-close" onclick="closeModal()">&times;</span>
+      <h2>Agent Registered</h2>
+      <div id="register-result"></div>
+    </div>
+  </div>
+
+  <script>
+    // Load pricing table
+    fetch('/v1/pricing')
+      .then(r => r.json())
+      .then(data => {
+        const container = document.getElementById('pricing-table');
+        let html = '<table><thead><tr><th>Model</th><th>Provider</th><th>Input</th><th>Output</th><th>Cache Read</th></tr></thead><tbody>';
+        for (const [model, info] of Object.entries(data.models)) {
+          const p = info.per_1m_tokens_usdc;
+          html += `<tr><td>${model}</td><td>${info.provider}</td><td>$${p.input}</td><td>$${p.output}</td><td>${p.cache_read ? '$' + p.cache_read : '—'}</td></tr>`;
+        }
+        html += '</tbody></table>';
+        container.innerHTML = html;
+      })
+      .catch(() => {
+        document.getElementById('pricing-table').innerHTML = '<p>Unable to load pricing. Check /v1/pricing.</p>';
+      });
+
+    async function registerAgent() {
+      try {
+        const res = await fetch('/v1/register', { method: 'POST' });
+        const data = await res.json();
+        const resultDiv = document.getElementById('register-result');
+        resultDiv.innerHTML = `
+          <div class="register-field">
+            <label>API Token</label>
+            <code class="copyable" onclick="navigator.clipboard.writeText('${data.api_token}')">${data.api_token}</code>
+          </div>
+          <div class="register-field">
+            <label>Deposit Code</label>
+            <code class="copyable" onclick="navigator.clipboard.writeText('${data.deposit_code}')">${data.deposit_code}</code>
+          </div>
+          <div class="register-field">
+            <label>Status</label>
+            <span>${data.status}</span>
+          </div>
+          <div class="register-field">
+            <label>Next Steps</label>
+            <ol>${data.instructions.steps.map(s => `<li>${s}</li>`).join('')}</ol>
+          </div>
+          <div class="register-field">
+            <label>Dashboard</label>
+            <a href="/dashboard.html?token=${data.api_token}" target="_blank">Open Dashboard</a>
+          </div>
+          <p class="copy-hint">Click any code to copy</p>
+        `;
+        document.getElementById('register-modal').classList.remove('hidden');
+      } catch (err) {
+        alert('Registration failed: ' + err.message);
+      }
+    }
+
+    function closeModal() {
+      document.getElementById('register-modal').classList.add('hidden');
+    }
+  </script>
+</body>
+</html>

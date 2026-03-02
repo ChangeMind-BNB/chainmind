@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChainMind Dashboard</title>
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    .dashboard { max-width: 1000px; margin: 0 auto; padding: 2rem; }
+    .dashboard h1 { color: var(--accent); margin-bottom: 2rem; }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+    }
+
+    .stat-card .label {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-card .value {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--accent);
+      font-family: var(--font-mono);
+    }
+
+    .stat-card .sub {
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      margin-top: 0.25rem;
+    }
+
+    .section-title {
+      font-size: 1.3rem;
+      margin: 2rem 0 1rem;
+      color: var(--text);
+    }
+
+    .connect-info {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .connect-info h3 { color: var(--accent); margin-bottom: 1rem; }
+
+    .connect-code {
+      background: var(--surface-2);
+      padding: 0.75rem 1rem;
+      border-radius: 6px;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--green);
+      margin-bottom: 0.75rem;
+      word-break: break-all;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: border-color 0.2s;
+    }
+    .connect-code:hover { border-color: var(--accent); }
+
+    .tx-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--surface);
+      border-radius: 12px;
+      overflow: hidden;
+      font-size: 0.85rem;
+    }
+
+    .tx-table th, .tx-table td {
+      padding: 0.6rem 0.75rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    .tx-table th { background: var(--surface-2); color: var(--accent); font-weight: 600; }
+
+    .tx-type { font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600; }
+    .tx-type.deposit { color: var(--green); }
+    .tx-type.llm_call { color: var(--blue); }
+
+    .loading { text-align: center; color: var(--text-muted); padding: 2rem; }
+    .error { color: var(--red); padding: 1rem; background: var(--surface); border-radius: 8px; }
+
+    .deposit-info {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .deposit-info h3 { color: var(--accent); margin-bottom: 0.5rem; }
+    .deposit-code {
+      font-family: var(--font-mono);
+      font-size: 1.5rem;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      margin: 0.5rem 0;
+    }
+
+    @media (max-width: 768px) {
+      .stats-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="/" class="logo">ChainMind</a>
+      <div class="nav-links">
+        <span style="color: var(--text-muted);">Agent Dashboard</span>
+      </div>
+    </nav>
+  </header>
+
+  <div class="dashboard">
+    <h1>Agent Dashboard</h1>
+
+    <div id="content">
+      <div class="loading">Loading...</div>
+    </div>
+  </div>
+
+  <script src="/dashboard.js"></script>
+</body>
+</html>
