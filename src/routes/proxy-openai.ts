@@ -47,7 +47,7 @@ export async function proxyOpenaiRoute(app: FastifyInstance) {
 
       // Detect provider by model prefix
       const isOpenRouter = model.startsWith('openrouter/');
-      const isStreaming = body.stream !== false;
+      const isStreaming = body.stream === true;
 
       if (isOpenRouter) {
         return isStreaming
@@ -69,7 +69,7 @@ async function dispatchToProvider(
   reply: any,
   routingInfo: { routed: boolean; requestedModel: string; actualModel: string }
 ) {
-  const isStreaming = body.stream !== false;
+  const isStreaming = body.stream === true;
 
   switch (provider) {
     case 'anthropic':

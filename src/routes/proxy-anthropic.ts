@@ -53,7 +53,7 @@ export async function proxyAnthropicRoute(app: FastifyInstance) {
       }
 
       // Normal (non-routed) Anthropic proxy
-      const isStreaming = body.stream !== false;
+      const isStreaming = body.stream === true;
 
       if (isStreaming) {
         return proxyAnthropicStreaming(request.agent, body, reply);
@@ -71,7 +71,7 @@ async function dispatchToProvider(
   reply: any,
   routingInfo: { routed: boolean; requestedModel: string; actualModel: string }
 ) {
-  const isStreaming = body.stream !== false;
+  const isStreaming = body.stream === true;
 
   switch (provider) {
     case 'anthropic':
