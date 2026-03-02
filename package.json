@@ -13,7 +13,8 @@
     "test": "vitest",
     "contract:compile": "cd contracts && npx hardhat compile",
     "contract:test": "cd contracts && npx hardhat test",
-    "contract:deploy": "cd contracts && npx hardhat run scripts/deploy.ts --network bsc"
+    "contract:deploy": "cd contracts && npx hardhat run scripts/deploy.ts --network bsc",
+    "contract:deploy:testnet": "cd contracts && npx hardhat run scripts/deploy.ts --network bscTestnet"
   },
   "dependencies": {
     "fastify": "^5.0.0",
